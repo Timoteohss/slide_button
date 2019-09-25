@@ -56,7 +56,6 @@ class _SwipeButtonState extends State<SwipeButton>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
   var _maxWidth = 0.0;
-  var _minWidth = 0.0;
 
   var logger = Logger();
 
@@ -67,8 +66,10 @@ class _SwipeButtonState extends State<SwipeButton>
         vsync: this, duration: const Duration(milliseconds: 300))
       ..addListener(() {
         setState(() {});
+
       });
     _animationController.value = 0.2;
+
   }
 
   @override
@@ -82,7 +83,6 @@ class _SwipeButtonState extends State<SwipeButton>
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           _maxWidth = constraints.maxWidth;
-          _minWidth = constraints.minWidth;
 
           return Stack(
             children: <Widget>[
@@ -109,7 +109,14 @@ class _SwipeButtonState extends State<SwipeButton>
                         widthFactor: _animationController.value,
                         heightFactor: 1.0,
                         child: Container(
-                          color: Colors.pink,
+                          decoration: BoxDecoration(
+                            color: Colors.pink,
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(50),
+                              topRight: Radius.circular(50)
+                            )
+                          ),
+                          
                         ),
                       ),
                     ),
@@ -122,7 +129,11 @@ class _SwipeButtonState extends State<SwipeButton>
   }
 
   void _onDrag(DragUpdateDetails details) {
-    _animationController.value = (details.globalPosition.dx) / _maxWidth;
+    if(widget.slideDirection == SlideDirection.RIGHT) {
+      _animationController.value = (details.globalPosition.dx) / _maxWidth;
+    } else {
+      _animationController.value = 1.0 - (details.globalPosition.dx) / _maxWidth;
+    }
   }
 
   void _onDragEnd(DragEndDetails details) {
