@@ -1,9 +1,4 @@
-import 'dart:async';
-import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 
 enum SlideDirection {
@@ -173,7 +168,7 @@ class _SwipeButtonState extends State<SwipeButton>
       _animationController.animateTo(
           widget.initialSliderPercentage,
           duration: Duration(milliseconds: 300),
-          curve: Curves.easeIn
+          curve: Curves.fastOutSlowIn
       );
     }
   }
