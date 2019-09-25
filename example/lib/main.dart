@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:swipe_button/swipe_button.dart';
+import 'package:slide_button/slide_button.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,16 +24,13 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-
-//    Size size = MediaQuery.of(context).size;
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: SwipeButton(
+          child: SlideButton(
             height: 64,
           )
         ),

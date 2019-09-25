@@ -1,4 +1,4 @@
-package com.timoteohss.swipe_button_example
+package com.timoteohss.slide_button_example
 
 import android.os.Bundle
 

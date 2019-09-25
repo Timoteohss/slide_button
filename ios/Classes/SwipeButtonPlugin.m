@@ -1,8 +1,8 @@
-#import "SwipeButtonPlugin.h"
-#import <swipe_button/swipe_button-Swift.h>
+#import "SlideButtonPlugin.h"
+#import <slide_button/slide_button-Swift.h>
 
-@implementation SwipeButtonPlugin
+@implementation SlideButtonPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  [SwiftSwipeButtonPlugin registerWithRegistrar:registrar];
+  [SwiftSlideButtonPlugin registerWithRegistrar:registrar];
 }
 @end

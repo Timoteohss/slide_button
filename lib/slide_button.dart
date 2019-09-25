@@ -8,7 +8,7 @@ enum SlideDirection {
 
 enum ButtonState { NOTCONFIRMED, CONFIRMED }
 
-class SwipeButton extends StatefulWidget {
+class SlideButton extends StatefulWidget {
 
 
   /// The height of this widget
@@ -47,19 +47,13 @@ class SwipeButton extends StatefulWidget {
   /// itself to the right of the screen and is confirmed .
   final SlideDirection slideDirection;
 
-  /// The default state of the button; either ButtonState.CONFIRMED or ButtonState.NOTCONFIRMED.
-  /// This value defaults to ButtonState.NOTCONFIRMED which indicates that the button is
-  /// in not confirmed by the user. ButtonState.CONFIRMED indicates that
-  /// by default the button is confirmed and the user does not have to swipe.
-  final ButtonState defaultPanelState;
 
-  const SwipeButton({
+  const SlideButton({
       Key key,
       this.height,
       this.confirmPercentage = 0.9,
       this.initialSliderPercentage = 0.2,
       this.slideDirection = SlideDirection.RIGHT,
-      this.defaultPanelState = ButtonState.NOTCONFIRMED,
       this.isDraggable = true,
       this.onButtonSlide,
       this.onButtonOpened,
@@ -67,13 +61,15 @@ class SwipeButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SwipeButtonState createState() => _SwipeButtonState();
+  _SlideButtonState createState() => _SlideButtonState();
 }
 
-class _SwipeButtonState extends State<SwipeButton>
+class _SlideButtonState extends State<SlideButton>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
   var _maxWidth = 0.0;
+  var _buttonState = ButtonState.NOTCONFIRMED;
+  
 
   var logger = Logger();
 
@@ -84,6 +80,8 @@ class _SwipeButtonState extends State<SwipeButton>
         vsync: this, duration: const Duration(milliseconds: 300))
       ..addListener(() {
         setState(() {});
+
+        if(_animationController.value == 1.0) _buttonState = ButtonState.CONFIRMED;
 
         if(widget.onButtonSlide != null) widget.onButtonSlide(_animationController.value);
 
@@ -122,7 +120,6 @@ class _SwipeButtonState extends State<SwipeButton>
                 child: GestureDetector(
                   onVerticalDragUpdate: widget.isDraggable ? _onDrag : null,
                   onVerticalDragEnd: widget.isDraggable ? _onDragEnd : null,
-                  onTap: () => print(_animationController.value),
                   child: Container(
                     height: widget.height,
                     child: Align(

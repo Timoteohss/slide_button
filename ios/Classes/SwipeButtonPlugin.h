@@ -1,4 +1,4 @@
 #import <Flutter/Flutter.h>
 
-@interface SwipeButtonPlugin : NSObject<FlutterPlugin>
+@interface SlideButtonPlugin : NSObject<FlutterPlugin>
 @end

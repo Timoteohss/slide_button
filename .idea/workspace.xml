@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c0f17d4-9cea-4e03-9008-274b8d8cf718" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/lib/swipe_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swipe_button.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/slide_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/slide_button.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -20,7 +20,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/swipe_button.dart">
+        <entry file="file://$PROJECT_DIR$/lib/slide_button.dart">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
               <caret line="5" column="7" lean-forward="true" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
@@ -58,7 +58,7 @@
       <list>
         <option value="$PROJECT_DIR$/pubspec.yaml" />
         <option value="$PROJECT_DIR$/example/lib/main.dart" />
-        <option value="$PROJECT_DIR$/lib/swipe_button.dart" />
+        <option value="$PROJECT_DIR$/lib/slide_button.dart" />
       </list>
     </option>
   </component>
@@ -78,12 +78,12 @@
         <subPane>
           <expand>
             <path>
-              <item name="swipe_button" type="b2602c69:ProjectViewProjectNode" />
-              <item name="swipe_button" type="462c0819:PsiDirectoryNode" />
+              <item name="slide_button" type="b2602c69:ProjectViewProjectNode" />
+              <item name="slide_button" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="swipe_button" type="b2602c69:ProjectViewProjectNode" />
-              <item name="swipe_button" type="462c0819:PsiDirectoryNode" />
+              <item name="slide_button" type="b2602c69:ProjectViewProjectNode" />
+              <item name="slide_button" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -189,7 +189,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/swipe_button.dart">
+    <entry file="file://$PROJECT_DIR$/lib/slide_button.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="5" column="7" lean-forward="true" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />

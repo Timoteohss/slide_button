@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/swipe_button.iml" filepath="$PROJECT_DIR$/.idea/swipe_button.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/slide_button.iml" filepath="$PROJECT_DIR$/.idea/slide_button.iml" />
     </modules>
   </component>
 </project>

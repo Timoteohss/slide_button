@@ -1,10 +1,10 @@
 import Flutter
 import UIKit
 
-public class SwiftSwipeButtonPlugin: NSObject, FlutterPlugin {
+public class SwiftSlideButtonPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "swipe_button", binaryMessenger: registrar.messenger())
-    let instance = SwiftSwipeButtonPlugin()
+    let channel = FlutterMethodChannel(name: "slide_button", binaryMessenger: registrar.messenger())
+    let instance = SwiftSlideButtonPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 

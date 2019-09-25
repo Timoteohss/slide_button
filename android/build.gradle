@@ -1,4 +1,4 @@
-group 'com.timoteohss.swipe_button'
+group 'com.timoteohss.slide_button'
 version '1.0-SNAPSHOT'
 
 buildscript {

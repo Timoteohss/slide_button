@@ -1,6 +1,6 @@
-# swipe_button_example
+# slide_button_example
 
-Demonstrates how to use the swipe_button plugin.
+Demonstrates how to use the slide_button plugin.
 
 ## Getting Started
 
