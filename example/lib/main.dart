@@ -29,10 +29,25 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: SlideButton(
-            height: 64,
-          )
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            SlideButton(
+              height: 64,
+              backgroundChild: Center(child: Text("KEK"),),
+              backgroundColor: Colors.amber,
+              slidingBarColor: Colors.blue,
+              slideDirection: SlideDirection.RIGHT,
+            ),
+            SlideButton(
+              height: 64,
+              backgroundColor: Colors.amber,
+              slidingBarColor: Colors.blue,
+              slideDirection: SlideDirection.LEFT,
+            ),
+
+            
+          ],
         ),
       ),
     );

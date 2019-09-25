@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 import 'package:logger/logger.dart';
 
 enum SlideDirection {
@@ -10,9 +11,22 @@ enum ButtonState { NOTCONFIRMED, CONFIRMED }
 
 class SlideButton extends StatefulWidget {
 
+  /// A child, allowing for any widget to
+  /// be put inside the background bar
+  final Widget backgroundChild;
+
+  /// A child, allowing for any widget to
+  /// be put inside the sliding bar
+  final Widget slidingChild;
 
   /// The height of this widget
   final double height;
+
+  /// Background color of this widget
+  final Color backgroundColor;
+
+  /// Sliding bar color of this widget
+  final Color slidingBarColor;
 
   /// The percentage the bar must be to the button be confirmed.
   /// defaults to 0.9
@@ -50,6 +64,8 @@ class SlideButton extends StatefulWidget {
 
   const SlideButton({
       Key key,
+      this.slidingChild,
+      this.backgroundChild,
       this.height,
       this.confirmPercentage = 0.9,
       this.initialSliderPercentage = 0.2,
@@ -57,7 +73,9 @@ class SlideButton extends StatefulWidget {
       this.isDraggable = true,
       this.onButtonSlide,
       this.onButtonOpened,
-      this.onButtonClosed,
+      this.onButtonClosed, 
+      @required this.backgroundColor, 
+      @required this.slidingBarColor,
   }) : super(key: key);
 
   @override
@@ -66,37 +84,42 @@ class SlideButton extends StatefulWidget {
 
 class _SlideButtonState extends State<SlideButton>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
+  AnimationController _slideAC;
+
+
+  var _borderRaidus = 50.0;
   var _maxWidth = 0.0;
   var _buttonState = ButtonState.NOTCONFIRMED;
   
-
-  var logger = Logger();
+  
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
+    _slideAC = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 300))
       ..addListener(() {
         setState(() {});
 
-        if(_animationController.value == 1.0) _buttonState = ButtonState.CONFIRMED;
+        _borderRaidus = 50 - (sigmoid(_slideAC.value) * 50);
 
-        if(widget.onButtonSlide != null) widget.onButtonSlide(_animationController.value);
+        if(_slideAC.value == 1.0) _buttonState = ButtonState.CONFIRMED;
 
-        if(widget.onButtonOpened != null && _animationController.value == 1.0) widget.onButtonOpened();
+        if(widget.onButtonSlide != null) widget.onButtonSlide(_slideAC.value);
 
-        if(widget.onButtonClosed != null && _animationController.value == widget.initialSliderPercentage) widget.onButtonClosed();
+        if(widget.onButtonOpened != null && _slideAC.value == 1.0) widget.onButtonOpened();
+
+        if(widget.onButtonClosed != null && _slideAC.value == widget.initialSliderPercentage) widget.onButtonClosed();
 
       });
-    _animationController.value = widget.initialSliderPercentage;
+
+    _slideAC.value = widget.initialSliderPercentage;
 
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _slideAC.dispose();
     super.dispose();
   }
 
@@ -112,7 +135,8 @@ class _SlideButtonState extends State<SlideButton>
                 alignment: Alignment(-1.0, 0.0),
                 child: Container(
                   height: widget.height,
-                  color: Colors.green,
+                  color: widget.backgroundColor,
+                  child: widget.backgroundChild ?? null,
                 ),
               ),
               Align(
@@ -127,17 +151,22 @@ class _SlideButtonState extends State<SlideButton>
                           ? Alignment.centerLeft
                           : Alignment.centerRight,
                       child: FractionallySizedBox(
-                        widthFactor: _animationController.value,
+                        widthFactor: _slideAC.value,
                         heightFactor: 1.0,
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.pink,
-                            borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(50),
-                              topRight: Radius.circular(50)
+                            color: widget.slidingBarColor,
+                            borderRadius: widget.slideDirection == SlideDirection.RIGHT
+                            ? BorderRadius.only(
+                              bottomRight: Radius.circular(_borderRaidus),
+                              topRight: Radius.circular(_borderRaidus)
                             )
+                            : BorderRadius.only(
+                              bottomLeft: Radius.circular(_borderRaidus),
+                              topLeft: Radius.circular(_borderRaidus)
+                            ) 
                           ),
-                          
+                          child: widget.slidingChild ?? null,
                         ),
                       ),
                     ),
@@ -149,20 +178,25 @@ class _SlideButtonState extends State<SlideButton>
     });
   }
 
+  // Temporary sigmoid function to remove borders from the sliding bar
+  double sigmoid(double x){
+    return 1/(1+exp(-61*x +54));
+  }
+
   void _onDrag(DragUpdateDetails details) {
     if(widget.slideDirection == SlideDirection.RIGHT) {
-      _animationController.value = (details.globalPosition.dx) / _maxWidth;
+      _slideAC.value = (details.globalPosition.dx) / _maxWidth;
     } else {
-      _animationController.value = 1.0 - (details.globalPosition.dx) / _maxWidth;
+      _slideAC.value = 1.0 - (details.globalPosition.dx) / _maxWidth;
     }
   }
 
   void _onDragEnd(DragEndDetails details) {
-    if(_animationController.isAnimating) return;
-    if(_animationController.value > widget.confirmPercentage) {
+    if(_slideAC.isAnimating) return;
+    if(_slideAC.value > widget.confirmPercentage) {
       _open();
     } else {
-      _animationController.animateTo(
+      _slideAC.animateTo(
           widget.initialSliderPercentage,
           duration: Duration(milliseconds: 300),
           curve: Curves.fastOutSlowIn
@@ -171,6 +205,6 @@ class _SlideButtonState extends State<SlideButton>
   }
 
   void _open() {
-    _animationController.fling(velocity: 1.0);
+    _slideAC.fling(velocity: 1.0);
   }
 }
