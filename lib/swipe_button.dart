@@ -23,10 +23,29 @@ class SwipeButton extends StatefulWidget {
   /// defaults to 0.9
   final double confirmPercentage;
 
+  /// The percentage the bar is set to snap when the user is not dragging
+  /// Doubles as the initial value for the bar
+  final double initialSliderPercentage;
+
   /// Allows toggling of the draggability of the SlidingUpPanel.
   /// Set this to false to prevent the user from being able to drag
   /// the panel up and down. Defaults to true.
   final bool isDraggable;
+
+  /// If non-null, this callback
+  /// is called as the button slides around with the
+  /// current position of the panel. The position is a double
+  /// between initialSliderPercentage and 1.0 where
+  /// initialSlidePercentage is fully NOTCONFIRMED and 1.0 is CONFIRMED.
+  final void Function(double position) onButtonSlide;
+
+  /// If non-null, this callback is called when the
+  /// button is CONFIRMED
+  final VoidCallback onButtonOpened;
+
+  /// If non-null, this callback is called when the button
+  /// is NOTCONFIRMED
+  final VoidCallback onButtonClosed;
 
   /// Either SlideDirection.LEFT or SlideDirection.RIGHT. Indicates which way
   /// the button need to be slided. Defaults to RIGHT. If set to LEFT, the panel attaches
@@ -39,14 +58,18 @@ class SwipeButton extends StatefulWidget {
   /// by default the button is confirmed and the user does not have to swipe.
   final ButtonState defaultPanelState;
 
-  const SwipeButton(
-      {Key key,
+  const SwipeButton({
+      Key key,
       this.height,
       this.confirmPercentage = 0.9,
+      this.initialSliderPercentage = 0.2,
       this.slideDirection = SlideDirection.RIGHT,
       this.defaultPanelState = ButtonState.NOTCONFIRMED,
-      this.isDraggable = true, })
-      : super(key: key);
+      this.isDraggable = true,
+      this.onButtonSlide,
+      this.onButtonOpened,
+      this.onButtonClosed,
+  }) : super(key: key);
 
   @override
   _SwipeButtonState createState() => _SwipeButtonState();
@@ -66,6 +89,12 @@ class _SwipeButtonState extends State<SwipeButton>
         vsync: this, duration: const Duration(milliseconds: 300))
       ..addListener(() {
         setState(() {});
+
+        if(widget.onButtonSlide != null) widget.onButtonSlide(_animationController.value);
+
+        if(widget.onButtonOpened != null && _animationController.value == 1.0) widget.onButtonOpened();
+
+        if(widget.onButtonClosed != null && _animationController.value == widget.initialSliderPercentage) widget.onButtonClosed();
 
       });
     _animationController.value = 0.2;
