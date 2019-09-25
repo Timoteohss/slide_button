@@ -97,7 +97,7 @@ class _SwipeButtonState extends State<SwipeButton>
         if(widget.onButtonClosed != null && _animationController.value == widget.initialSliderPercentage) widget.onButtonClosed();
 
       });
-    _animationController.value = 0.2;
+    _animationController.value = widget.initialSliderPercentage;
 
   }
 
@@ -167,13 +167,13 @@ class _SwipeButtonState extends State<SwipeButton>
 
   void _onDragEnd(DragEndDetails details) {
     if(_animationController.isAnimating) return;
-    if(_animationController.value > 0.9) {
+    if(_animationController.value > widget.confirmPercentage) {
       _open();
     } else {
       _animationController.animateTo(
-          0.2,
+          widget.initialSliderPercentage,
           duration: Duration(milliseconds: 300),
-          curve: Curves.decelerate
+          curve: Curves.easeIn
       );
     }
   }
@@ -182,66 +182,3 @@ class _SwipeButtonState extends State<SwipeButton>
     _animationController.fling(velocity: 1.0);
   }
 }
-
-//
-//void _onDragUpdate(DragUpdateDetails details) {
-//  final pos = _container.globalToLocal(details.globalPosition) - _start;
-////    print("container: ${_container.globalToLocal(details.globalPosition)}, start: $_start");
-//
-//  final off = _container.size.width * 0.7;
-//  final extent = _container.size.width - _positioned.size.width + off;
-////    print("container width: ${_container.size.width}, positioned: ${_positioned.size.width}");
-//
-////    _controller.value = 0.2 + ((pos.dx.clamp(0.0, extent) / extent) * 0.75);
-//  _controller.value = 0.2 + ((pos.dx.clamp(0.0, extent) / extent) * 0.75);
-////    print("Pos: ${pos.dx}, extend: $extent, value: ${_controller.value}");
-//}
-//
-//void _onDragEnd(DragEndDetails details) {
-//  final extent = _container.size.width - _positioned.size.width;
-//  var fractionalVelocity = (details.primaryVelocity / extent).abs();
-//  if (fractionalVelocity < 0.5) {
-//    fractionalVelocity = 0.5;
-//  }
-//  SwipePosition result;
-//  double acceleration, velocity;
-//  if (_controller.value > 0.90) {
-//    acceleration = 3;
-//    velocity = fractionalVelocity;
-//    result = SwipePosition.SwipeRight;
-//    if(widget.onChanged != null) {
-//      widget.onChanged(result);
-//    }
-//  } else {
-//    acceleration = -3;
-//    velocity = -fractionalVelocity;
-//    result = SwipePosition.SwipeLeft;
-//  }
-//  final simulation = _SwipeSimulation(
-//    acceleration,
-//    _controller.value,
-//    1.0,
-//    velocity,
-//  );
-//  _controller.animateWith(simulation).then((_) {
-//    if (widget.onChanged != null) {
-//      _controller.value = 0.2;
-//    }
-//  });
-//}
-//
-//
-//class _SwipeSimulation extends GravitySimulation {
-//  _SwipeSimulation(
-//      double acceleration, double distance, double endDistance, double velocity)
-//      : super(acceleration, distance, endDistance, velocity);
-//
-//  @override
-//  double x(double time) => super.x(time).clamp(0.2, 1.0);
-//
-//  @override
-//  bool isDone(double time) {
-//    final _x = x(time).abs();
-//    return _x <= 0.2 || _x >= 1.0;
-//  }
-//}
