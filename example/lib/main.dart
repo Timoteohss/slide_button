@@ -12,15 +12,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
-
-
   @override
   void initState() {
     super.initState();
-
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -34,19 +29,43 @@ class _MyAppState extends State<MyApp> {
           children: <Widget>[
             SlideButton(
               height: 64,
-              backgroundChild: Center(child: Text("KEK"),),
+              backgroundChild: Center(
+                child: Text("This is a centered text"),
+              ),
               backgroundColor: Colors.amber,
               slidingBarColor: Colors.blue,
               slideDirection: SlideDirection.RIGHT,
             ),
             SlideButton(
               height: 64,
-              backgroundColor: Colors.amber,
+              backgroundColor: Colors.transparent,
+              slidingChild: Center(child: Text("This is a sliding text."),),
               slidingBarColor: Colors.blue,
               slideDirection: SlideDirection.LEFT,
             ),
-
-            
+            SlideButton(
+              height: 64,
+              slidingChild: Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 16),
+                    child: Icon(Icons.chevron_right)),
+              ),
+              backgroundColor: Colors.amber,
+              slidingBarColor: Colors.blue,
+              slideDirection: SlideDirection.RIGHT,
+            ),
+            SizedBox(
+              height: 300,
+              child: SlideButton(
+                backgroundColor: Colors.amber,
+                backgroundChild: Center(
+                  child: Text("I'm expandable!"),
+                ),
+                slidingBarColor: Colors.blue,
+                slideDirection: SlideDirection.LEFT,
+              ),
+            ),
           ],
         ),
       ),
