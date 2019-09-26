@@ -14,3 +14,7 @@
 
 * These version numbers are completely made up!
 * Added better examples
+
+## 0.2.3
+
+* Fixed pubspec

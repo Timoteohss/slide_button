@@ -1,8 +1,8 @@
 name: slide_button
 description: A swipe to confirm button for flutter.
-version: 0.2.2
-author: Timóteo Holanda
-homepage:
+version: 0.2.3
+author: Timóteo Holanda <timoteohss@gmail.com>
+homepage: https://github.com/Timoteohss/slide_button
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
