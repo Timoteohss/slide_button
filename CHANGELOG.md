@@ -1,6 +1,6 @@
 ## 0.0.1
 
-* TODO: Initilized package.
+* IT'S ALIVE
 
 ## 0.5.0
 
@@ -8,7 +8,7 @@
 
 ## 0.2.1
 
-* Added childs and colors!
+* Added child's and colors!
 
 ## 0.2.2
 
@@ -18,3 +18,11 @@
 ## 0.2.3
 
 * Fixed pubspec
+
+## 0.2.4
+
+* Added shouldCloseBorders
+* Light Refactoring
+* Fixed some typos
+* Removed Logger as dependency
+* Added license

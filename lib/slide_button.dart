@@ -32,11 +32,16 @@ class SlideButton extends StatefulWidget {
   /// defaults to 0.9
   final double confirmPercentage;
 
+  /// This updates the borders when the button reaches 0.9
+  /// percent dragged, and set the borderRadius to zero,
+  /// giving the impression of a "closed" button
+  final bool shouldCloseBorders;
+
   /// The percentage the bar is set to snap when the user is not dragging
   /// Doubles as the initial value for the bar
   final double initialSliderPercentage;
 
-  /// Allows toggling of the draggability of the SlidingUpPanel.
+  /// Allows toggling of the draggability of the Button.
   /// Set this to false to prevent the user from being able to drag
   /// the panel up and down. Defaults to true.
   final bool isDraggable;
@@ -76,6 +81,7 @@ class SlideButton extends StatefulWidget {
       this.onButtonClosed, 
       @required this.backgroundColor, 
       @required this.slidingBarColor,
+    this.shouldCloseBorders = true,
   }) : super(key: key);
 
   @override
@@ -87,9 +93,8 @@ class _SlideButtonState extends State<SlideButton>
   AnimationController _slideAC;
 
 
-  var _borderRaidus = 50.0;
+  var _borderRadius = 50.0;
   var _maxWidth = 0.0;
-  var _buttonState = ButtonState.NOTCONFIRMED;
   
   
 
@@ -101,9 +106,7 @@ class _SlideButtonState extends State<SlideButton>
       ..addListener(() {
         setState(() {});
 
-        _borderRaidus = 50 - (sigmoid(_slideAC.value) * 50);
-
-        if(_slideAC.value == 1.0) _buttonState = ButtonState.CONFIRMED;
+        if(widget.shouldCloseBorders) _borderRadius = 50 - (sigmoid(_slideAC.value) * 50);
 
         if(widget.onButtonSlide != null) widget.onButtonSlide(_slideAC.value);
 
@@ -158,12 +161,12 @@ class _SlideButtonState extends State<SlideButton>
                             color: widget.slidingBarColor,
                             borderRadius: widget.slideDirection == SlideDirection.RIGHT
                             ? BorderRadius.only(
-                              bottomRight: Radius.circular(_borderRaidus),
-                              topRight: Radius.circular(_borderRaidus)
+                              bottomRight: Radius.circular(_borderRadius),
+                              topRight: Radius.circular(_borderRadius)
                             )
                             : BorderRadius.only(
-                              bottomLeft: Radius.circular(_borderRaidus),
-                              topLeft: Radius.circular(_borderRaidus)
+                              bottomLeft: Radius.circular(_borderRadius),
+                              topLeft: Radius.circular(_borderRadius)
                             ) 
                           ),
                           child: widget.slidingChild ?? null,
@@ -193,8 +196,9 @@ class _SlideButtonState extends State<SlideButton>
 
   void _onDragEnd(DragEndDetails details) {
     if(_slideAC.isAnimating) return;
+
     if(_slideAC.value > widget.confirmPercentage) {
-      _open();
+      _slideAC.fling(velocity: 1.0);
     } else {
       _slideAC.animateTo(
           widget.initialSliderPercentage,
@@ -204,7 +208,4 @@ class _SlideButtonState extends State<SlideButton>
     }
   }
 
-  void _open() {
-    _slideAC.fling(velocity: 1.0);
-  }
 }
