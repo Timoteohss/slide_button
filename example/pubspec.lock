@@ -46,13 +46,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  logger:
-    dependency: transitive
-    description:
-      name: logger
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.7.0+2"
   matcher:
     dependency: transitive
     description:
@@ -99,7 +92,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.2.4"
+    version: "0.2.5"
   source_span:
     dependency: transitive
     description:

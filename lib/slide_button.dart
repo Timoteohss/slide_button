@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:logger/logger.dart';
 
 enum SlideDirection {
   RIGHT,

@@ -26,3 +26,8 @@
 * Fixed some typos
 * Removed Logger as dependency
 * Added license
+
+## 0.2.5
+
+* NOW logger is not a dependency
+* Readme improvements

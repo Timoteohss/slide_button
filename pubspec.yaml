@@ -1,6 +1,6 @@
 name: slide_button
 description: A sliding Flutter widget, based on the slide to unlock function from multiple devices. Heavily customizable and flexible.
-version: 0.2.4
+version: 0.2.5
 author: Timóteo Holanda <timoteohss@gmail.com>
 homepage: https://github.com/Timoteohss/slide_button
 
@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  logger: ^0.7.0+2
 
 
 dev_dependencies:
