@@ -40,7 +40,7 @@ Several properties are present and can be customized:
 | shouldCloseBorders      	| This updates the borders when the button reaches 0.9 percent dragged, and set the borderRadius to zero, giving the impression of a "closed" button. Defaults to `true` 	|
 ``` 
 
-#TODO
+## TODO
 - [x] Create the repo
 - [x] Make it work
 - [ ] Fix text on the sliding bar
