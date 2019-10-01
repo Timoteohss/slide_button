@@ -38,6 +38,7 @@ class _MyAppState extends State<MyApp> {
             ),
             SlideButton(
               height: 64,
+              borderRadius: 0.0,
               backgroundColor: Colors.transparent,
               slidingChild: Center(child: Text("This is a sliding text."),),
               slidingBarColor: Colors.blue,

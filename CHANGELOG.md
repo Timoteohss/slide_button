@@ -31,3 +31,7 @@
 
 * NOW logger is not a dependency
 * Readme improvements
+
+## 0.2.6
+
+* Added borderRadius

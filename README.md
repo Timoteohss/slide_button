@@ -38,6 +38,8 @@ Several properties are present and can be customized:
 | onButtonClosed          	| Callback called when the button is back to the initialSliderPercentage.                                                                                                	|
 | slideDirection          	| Either SlideDirection.RIGHT or SlideDirection.LEFT, sets the sliding direction of the sliding bar.                                                                     	|
 | shouldCloseBorders      	| This updates the borders when the button reaches 0.9 percent dragged, and set the borderRadius to zero, giving the impression of a "closed" button. Defaults to `true` 	|
+| shouldCloseBorders      	| BorderRadius for the sliding bar, default is 50. 	                                                                                                                        |
+
 ``` 
 
 ## TODO

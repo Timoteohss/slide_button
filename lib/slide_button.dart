@@ -24,6 +24,9 @@ class SlideButton extends StatefulWidget {
   /// Background color of this widget
   final Color backgroundColor;
 
+  /// BorderRadius for the sliding bar, default is 50
+  final double borderRadius;
+
   /// Sliding bar color of this widget
   final Color slidingBarColor;
 
@@ -48,8 +51,7 @@ class SlideButton extends StatefulWidget {
   /// If non-null, this callback
   /// is called as the button slides around with the
   /// current position of the panel. The position is a double
-  /// between initialSliderPercentage and 1.0 where
-  /// initialSlidePercentage is fully NOTCONFIRMED and 1.0 is CONFIRMED.
+  /// between initialSliderPercentage and 1.0
   final void Function(double position) onButtonSlide;
 
   /// If non-null, this callback is called when the
@@ -57,7 +59,7 @@ class SlideButton extends StatefulWidget {
   final VoidCallback onButtonOpened;
 
   /// If non-null, this callback is called when the button
-  /// is NOTCONFIRMED
+  /// is NOT CONFIRMED
   final VoidCallback onButtonClosed;
 
   /// Either SlideDirection.LEFT or SlideDirection.RIGHT. Indicates which way
@@ -81,6 +83,7 @@ class SlideButton extends StatefulWidget {
       @required this.backgroundColor, 
       @required this.slidingBarColor,
     this.shouldCloseBorders = true,
+    this.borderRadius = 50.0,
   }) : super(key: key);
 
   @override
@@ -92,7 +95,7 @@ class _SlideButtonState extends State<SlideButton>
   AnimationController _slideAC;
 
 
-  var _borderRadius = 50.0;
+  var _borderRadius = 0.0;
   var _maxWidth = 0.0;
   
   
@@ -100,12 +103,15 @@ class _SlideButtonState extends State<SlideButton>
   @override
   void initState() {
     super.initState();
+
+    _borderRadius = widget.borderRadius;
+
     _slideAC = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 300))
       ..addListener(() {
         setState(() {});
 
-        if(widget.shouldCloseBorders) _borderRadius = 50 - (sigmoid(_slideAC.value) * 50);
+        if(widget.shouldCloseBorders) _borderRadius = widget.borderRadius - (sigmoid(_slideAC.value) * widget.borderRadius);
 
         if(widget.onButtonSlide != null) widget.onButtonSlide(_slideAC.value);
 
