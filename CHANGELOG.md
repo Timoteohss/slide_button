@@ -35,3 +35,7 @@
 ## 0.2.6
 
 * Added borderRadius
+
+## 0.2.7 
+
+* Formatted code for better understanding

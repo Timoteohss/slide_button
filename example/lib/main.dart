@@ -40,7 +40,9 @@ class _MyAppState extends State<MyApp> {
               height: 64,
               borderRadius: 0.0,
               backgroundColor: Colors.transparent,
-              slidingChild: Center(child: Text("This is a sliding text."),),
+              slidingChild: Center(
+                child: Text("This is a sliding text."),
+              ),
               slidingBarColor: Colors.blue,
               slideDirection: SlideDirection.LEFT,
             ),
