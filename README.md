@@ -9,7 +9,7 @@ Add the following to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-slide_button: ^0.2.7
+slide_button: ^0.2.8
 ```
 
 ## Usage

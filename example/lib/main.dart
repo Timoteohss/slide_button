@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:slide_button/slide_button.dart';
 
 void main() => runApp(MyApp());
@@ -12,9 +9,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  TextEditingController textController1 = TextEditingController();
+  TextEditingController textController2 = TextEditingController();
+
   @override
   void initState() {
     super.initState();
+
+    textController2.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -25,8 +29,21 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
+            Container(
+              height: 64,
+              width: double.infinity,
+              color: Colors.grey,
+              child: Center(
+                  child: Column(
+                children: <Widget>[
+                  Text(
+                      "The next slider has just been: ${textController1.text}"),
+                  Text("The next slider value is: ${textController2.text}"),
+                ],
+              )),
+            ),
             SlideButton(
               height: 64,
               backgroundChild: Center(
@@ -35,6 +52,15 @@ class _MyAppState extends State<MyApp> {
               backgroundColor: Colors.amber,
               slidingBarColor: Colors.blue,
               slideDirection: SlideDirection.RIGHT,
+              onButtonOpened: () {
+                textController1.text = "Opened";
+              },
+              onButtonClosed: () {
+                textController1.text = "Closed";
+              },
+              onButtonSlide: (value) {
+                textController2.text = value.toString();
+              },
             ),
             SlideButton(
               height: 64,

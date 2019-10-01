@@ -39,3 +39,7 @@
 ## 0.2.7 
 
 * Formatted code for better understanding
+
+## 0.2.8
+
+* Added Callback examples before going public
