@@ -198,7 +198,7 @@ class _SlideButtonState extends State<SlideButton>
   void _onDragEnd(DragEndDetails details) {
     if (_slideAC.isAnimating) return;
 
-    if (_slideAC.value > widget.confirmPercentage) {
+    if (_slideAC.value > widget.confirmPercentage && _slideAC.value < 1.0) {
       _slideAC.fling(velocity: 1.0);
     } else {
       _slideAC.animateTo(widget.initialSliderPercentage,
