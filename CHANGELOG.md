@@ -43,3 +43,8 @@
 ## 0.2.8
 
 * Added Callback examples before going public
+
+## 0.2.9
+
+* Fixed example on both Android and iOS
+* removed plugin propriety
