@@ -1,8 +1,12 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=C:\flutter"
-export "FLUTTER_APPLICATION_PATH=C:\Users\Timoteo\Documents\slide_button\example"
-export "FLUTTER_TARGET=lib\main.dart"
+export "FLUTTER_ROOT=/Users/timoteoholanda/development/flutter"
+export "FLUTTER_APPLICATION_PATH=/Users/timoteoholanda/development/slide_button/example"
+export "FLUTTER_TARGET=/Users/timoteoholanda/development/slide_button/example/lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
-export "SYMROOT=${SOURCE_ROOT}/../build\ios"
-export "FLUTTER_FRAMEWORK_DIR=C:\flutter\bin\cache\artifacts\engine\ios"
+export "SYMROOT=${SOURCE_ROOT}/../build/ios"
+export "OTHER_LDFLAGS=$(inherited) -framework Flutter"
+export "FLUTTER_FRAMEWORK_DIR=/Users/timoteoholanda/development/flutter/bin/cache/artifacts/engine/ios-release"
+export "FLUTTER_BUILD_NAME=0.0.1"
+export "FLUTTER_BUILD_NUMBER=0.0.1"
+export "TRACK_WIDGET_CREATION=true"
