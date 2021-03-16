@@ -7,6 +7,7 @@ enum SlideDirection {
 }
 
 enum ButtonState { NOTCONFIRMED, CONFIRMED }
+enum UpdateAxis { HORIZONTAL, VERTICAL }
 
 class SlideButton extends StatefulWidget {
   /// A child, allowing for any widget to
@@ -66,6 +67,9 @@ class SlideButton extends StatefulWidget {
   /// itself to the right of the screen and is confirmed .
   final SlideDirection slideDirection;
 
+  /// Either UpdateAxis.HORIZONTAL or UpdateAxis.VERTICAL. Indicates which gesture event is used.
+  final UpdateAxis updateAxis;
+
   const SlideButton({
     Key key,
     this.slidingChild,
@@ -74,6 +78,7 @@ class SlideButton extends StatefulWidget {
     this.confirmPercentage = 0.9,
     this.initialSliderPercentage = 0.2,
     this.slideDirection = SlideDirection.RIGHT,
+    this.updateAxis = UpdateAxis.HORIZONTAL,
     this.isDraggable = true,
     this.onButtonSlide,
     this.onButtonOpened,
@@ -148,8 +153,19 @@ class _SlideButtonState extends State<SlideButton>
           Align(
             alignment: Alignment(-1.0, 0.0),
             child: GestureDetector(
-              onVerticalDragUpdate: widget.isDraggable ? _onDrag : null,
-              onVerticalDragEnd: widget.isDraggable ? _onDragEnd : null,
+              onVerticalDragUpdate: (widget.updateAxis == UpdateAxis.VERTICAL)
+                  ? (widget.isDraggable ? _onDrag : null)
+                  : null,
+              onVerticalDragEnd: (widget.updateAxis == UpdateAxis.VERTICAL)
+                  ? (widget.isDraggable ? _onDragEnd : null)
+                  : null,
+              onHorizontalDragUpdate:
+                  (widget.updateAxis == UpdateAxis.HORIZONTAL)
+                      ? (widget.isDraggable ? _onDrag : null)
+                      : null,
+              onHorizontalDragEnd: (widget.updateAxis == UpdateAxis.HORIZONTAL)
+                  ? (widget.isDraggable ? _onDragEnd : null)
+                  : null,
               child: Container(
                 height: widget.height,
                 child: Align(
